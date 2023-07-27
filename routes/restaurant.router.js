@@ -1,17 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Restaurant = require("../controllers/restaurant.controller");
+const {getAll ,getById ,creatRes, deleteById, updateById} =require ('../controllers/restaurant.controller')
 
-//Create a new restaurant
-//http://localhost:5000/restaurant
-router.post("/restaurant", async (req, res) => {
-  try {
-    const newRestaurant = req.body;
-    const createReataurant = await Restaurant.createReataurant(newRestaurant);
-    res.status(201).json(createReataurant);
-  } catch (error) {
-    res.status(500).json({error:"Failed to create restaurant"})
-  }
-});
+
+router.get("/restaurant", getAll);
+router.get("/restaurant/:id", getById)
+router.post('/restaurant',creatRes)
+router.delete('/restaurant/:id',deleteById)
+router.put('/restaurant/:id',updateById)
 
 module.exports = router;
