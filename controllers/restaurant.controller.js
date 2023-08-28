@@ -1,8 +1,9 @@
 const Restaurant = require("../models/restaurant.model");
 const getAll = async (req, res) => {
   try {
-    const restaurantsList = await Restaurant.findAll();
-    res.status(200).json({ restaurantsList });
+    const restaurantList = await Restaurant.findAll()
+        const result = restaurantList.map((restaurant)=> {return restaurant.toJSON()})
+        res.status(200).json(result)
     return;
   } catch (err) {
     console.log(err);
@@ -56,6 +57,7 @@ const deleteById = async (req, res) => {
 const updateById = async (req, res) => {
     const id = req.params.id
     const {name, type, img} = req.body
+    console.log(req.body);
     if (!name || !type || !img) {
         return res.status(400).send('Please provide all value')
     }
